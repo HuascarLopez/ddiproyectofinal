@@ -1,0 +1,27 @@
+{
+  "name": "DDI - Proyecto Final",
+  "version": "0.0.1",
+  "description": "A starter project that automatically serves SASS as CSS with Express.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "node-sass": "^4.8.3",
+    "express-compile-sass": "^3.0.4",
+    "highlight": "^0.2.4"
+  },
+  "engines": {
+    "node": "9.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/crto-cajasamistad"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "sass"
+  ]
+}
