@@ -1,0 +1,229 @@
+$max-tab-count: 5;
+$tab-wrap-border-radius: 6px;
+.tab-wrap {
+  transition: 0.3s box-shadow ease;
+  border-radius: $tab-wrap-border-radius;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  margin: 20px 0;
+  box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+}
+
+.tab {
+  display: none;
+  @for $i from 1 through $max-tab-count {
+    &:checked:nth-of-type(#{$i}) ~ .tab__content:nth-of-type(#{$i}) {
+      opacity: 1;
+      transition: 0.5s opacity ease-in, 0.8s transform ease;
+      position: relative;
+      top: 0;
+      z-index: 100;
+      transform: translateY(0px);
+      text-shadow: 0 0 0;
+    }
+  }
+  &:first-of-type:not(:last-of-type) + label {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:not(:first-of-type):not(:last-of-type) + label {
+    border-radius: 0;
+  }
+  &:last-of-type:not(:first-of-type) + label {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &:checked + label {
+    background-color: #ffdd00;
+    box-shadow: 0 -1px 0 #fff inset;
+    cursor: default;
+    &:hover {
+      box-shadow: 0 -1px 0 #fff inset;
+      background-color: #fff194;
+    }
+  }
+  + label {
+    box-shadow: 0 -1px 0 #eee inset;
+    border-radius: $tab-wrap-border-radius $tab-wrap-border-radius 0 0;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: #222;
+    flex-grow: 3;
+    text-align: center;
+    background-color: #f2f2f2;
+    user-select: none;
+    text-align: center;
+    transition: 0.3s background-color ease, 0.3s box-shadow ease;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 10px;
+    &:hover {
+      background-color: #f9f9f9;
+      box-shadow: 0 1px 0 #f4f4f4 inset;
+    }
+  }
+  &__content {
+    padding: 10px 25px;
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+    left: 0;
+    transform: translateY(-3px);
+    border-radius: $tab-wrap-border-radius;
+  }
+}
+
+
+/* boring stuff */
+
+body {
+  font-family: 'Helvetica', sans-serif;
+  background-color: #fafafa;
+  color: #555;
+  padding: 30px 0;
+  font-weight: 300;
+}
+
+.container {
+  margin: 0 auto;
+  display: block;
+  max-width: 1000px;
+  > *:not(.tab-wrap) {
+    padding: 0 80px;
+  }
+}
+
+h1,
+h2 {
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+}
+
+h1{
+  color: #333;
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+
+
+h3 {
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+h4 {
+  margin-bottom: 0px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+p,li {
+  text-align: justify;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+p, ul{
+  padding: 0 100px;
+}
+
+code {
+  margin-top: 10px;
+  padding: 2px 2px;
+  white-space: pre-wrap;
+  background-color: #444;
+  color: #fafafa;
+}
+
+footer{
+  text-align: center;
+  width: 300px;
+  border-top: 1px #bababa solid;
+  padding-top: 10px;
+  margin: auto;
+}
+
+#footer {
+  margin: auto;
+  padding: 2px;
+  width: 300px;
+  text-decoration: underline;
+  color: #000;
+}
+
+#footer:hover{
+  color: steelblue;
+}
+
+.myCode{
+  padding: 2px 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.myCode:hover{
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.23), 0 5px 5px rgba(0, 0, 0, 0.19);
+}
+
+ol {
+  color: #999;
+  list-style-type: none;
+}
+ 
+ol li {
+  position: relative;
+  font: bold italic 24px Helvetica, Verdana, sans-serif;
+  margin-bottom: 20px;
+  border-bottom: 1px #777 solid;
+}
+
+ol li:hover{
+  color: #222;
+}
+ 
+
+.accordion {
+  margin: 20px auto;
+  width: 800px;
+}
+
+.accordion header {
+  line-height: 1.2;
+  font-size: 20px;
+  margin: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #222;
+  color: white;
+  font-weight: lighter;
+}
+.accordion section {
+  overflow: hidden;
+  height: 300px;
+  border: 2px solid #fafafa;
+  border-bottom: none;
+  transition: height 0.7s ease;
+}
+
+.accordion header:hover {
+  background-color: steelblue;
+}
+
+.accordion section:last-child {
+  border-bottom: 2px solid #fafafa;
+}
+.accordion section.hidden {
+  height: 40px;
+}
+.accordion p, h3 {
+  padding: 10px 20px;
+}
