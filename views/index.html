@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="dest/style.css" />
     <link rel="stylesheet" href="style.scss" />
     <link
       rel="shortcut icon"
@@ -15,8 +14,8 @@
     />
 
     <!-- import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://use.fontawesome.com/3b98e9f266.js"></script>
     <link
       rel="stylesheet"
@@ -59,9 +58,9 @@
         <input type="radio" id="tab1" name="tabGroup1" class="tab" checked />
         <label for="tab1">Introducción</label>
         <input type="radio" id="tab2" name="tabGroup1" class="tab" />
-        <label for="tab2">Tablero</label>
+        <label for="tab2">Uso de la API</label>
         <input type="radio" id="tab3" name="tabGroup1" class="tab" />
-        <label for="tab3">Uso de la API</label>
+        <label for="tab3">Tablero</label>
         <input type="radio" id="tab4" name="tabGroup1" class="tab" />
         <label for="tab4">Recursos e investigación</label>
 
@@ -84,7 +83,7 @@
             <strong>Objetivos</strong><br />
             <i>Objetivo general</i><br />
             Establecer un sistema de monitoreo de los niveles de luz de una
-            casa.
+            casa.<br />
             <i>Objetivos específicos</i><br />
             Recopilar señales digitales empleando sensores y placas de
             desarrollo. Utilizar un protocolo de comunicación serial. Registrar
@@ -95,7 +94,7 @@
             <strong>Planteamiento del problema</strong><br />
             Existiendo una casa con tres habitaciones principales compartidas:
             sala, cocina y baño se busca registrar la cantidad de tiempo en que
-            los focos estuvieron encendidos.
+            los focos estuvieron encendidos.<br />
             <i>Procedimiento:</i><br />
           </p>
 
@@ -126,10 +125,67 @@
           </ul>
         </div>
         <div class="tab__content">
-          <h1>Tablero</h1>
+          <h1>Uso de la API</h1>
+          <h2 style="text-align: left; margin-left: 75px">
+            Test respuestas de la API:
+          </h2>
+          <div id="sampleposting">
+            <div>
+              <form action="/api/rooms" method="post" class="border">
+                <h4>Test post hacia /api/rooms</h4>
+                Room Title:<br />
+                <input type="text" name="title" value="" /><br />
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+            <div>
+              <form action="" method="post" id="dpTest" class="border">
+                <h4>Test post to /api/rooms/{roomid}</h4>
+                RoomId to add datapoint:<br />
+                <input type="text" name="id" value="" id="idinputtest" /><br />
+                Datapoint:<br />
+                <input type="text" name="datapoint" value="" /><br />
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
         </div>
         <div class="tab__content">
-          <h1>Uso de la API</h1>
+          <h1>Tablero</h1>
+          <div id="sensorLabels">
+            <div class="sensor-label">
+              <label>Bedroom</label>
+              <label id="bedroom-value">10</label>
+              <label id="bedroom-category">OFF</label>
+              <label id="bedroom-date"></label>
+            </div>
+            <div class="sensor-label">
+              <label>Bathroom</label>
+              <label id="bathroom-value">10</label>
+              <label id="bathroom-category">OFF</label>
+              <label id="bathroom-date"></label>
+            </div>
+            <div class="sensor-label">
+              <label>Livingroom</label>
+              <label id="livinghroom-value">10</label>
+              <label id="livingroom-category">OFF</label>
+              <label id="livingroom-date"></label>
+            </div>
+            <div class="sensor-label">
+              <label>Kitchen</label>
+              <label id="kitchen-value">10</label>
+              <label id="kitchen-category">OFF</label>
+              <label id="kitchen-date"></label>
+            </div>
+          </div>
+          <div
+            id="chartContainer"
+            style="height: 300px; width: 80%; margin: 20px auto"
+          ></div>
+          <div
+            id="pieContainer"
+            style="height: 300px; width: 80%; margin: 20px auto"
+          ></div>
         </div>
         <div class="tab__content">
           <h1>Recursos e investigación</h1>
@@ -144,5 +200,22 @@
         </a>
       </section>
     </footer>
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/public/client.js"></script>
+    <script>
+      /*
+       *  For #sampleposting to update form action url to test inputs into a room id
+       */
+      $(function() {
+        $("#dpTest").submit(function() {
+          var id = $("#idinputtest").val();
+          $(this).attr("action", "/api/rooms/" + id);
+        });
+      });
+    </script>
   </body>
 </html>
