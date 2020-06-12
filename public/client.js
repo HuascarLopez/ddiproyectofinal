@@ -1,6 +1,4 @@
- /* 
- Acordion class handler, for FAQ segment.
- */
+ // Acordion class handler
 $(".accordion").on("click", "header", function() {
   if (
     $(this)
@@ -17,9 +15,6 @@ $(".accordion").on("click", "header", function() {
   }
 });
 
-/*
- Get information from REST API and put in dashboard labels
-*/
 $(document).ready(function() {
   const items = [];
   const itemsRaw = [];
@@ -43,9 +38,7 @@ $(document).ready(function() {
   });
 });
 
-/*
-  Dynamic Line Chart
-*/
+//Dynamic Line Chart
 window.onload = function() {
   const now = new Date();
   const items = [];
@@ -83,30 +76,26 @@ window.onload = function() {
     data: [
       {
         type: "line",
-        markerType: "square",
         showInLegend: true,
-      legendText: "Bedroom",
+        legendText: "Bedroom",
         dataPoints: dpsBed
       },
       {
         type: "line",
         showInLegend: true,
         legendText: "Bathroom",
-        markerType: "square",
         dataPoints: dpsBath
       },
       {
         type: "line",
         showInLegend: true,
         legendText: "Livingroom",
-        markerType: "square",
         dataPoints: dpsLiving
       },
       {
         type: "line",
         showInLegend: true,
         legendText: "Kitchen",
-        markerType: "square",
         dataPoints: dpsKitchen
       }
     ]
@@ -125,21 +114,38 @@ window.onload = function() {
       $.getJSON("/api/rooms/BjpgUJTT", function(data) {
         data = data.datapoints;
         lastDP = parseInt(data[data.length - 1].value);
-        lastDP = lastDP + Math.round(5 + Math.random() *(-5));
+        //lastDP = lastDP + Math.round(5 + Math.random() *(-5));
 
-        if (parseInt(lastDP) > 10) {
+        if (parseInt(lastDP) > 50) {
           category = "Lights ON";
+          $("#bedroom-category").addClass('on');
         } else {
           category = "Lights OFF";
+          $("#bedroom-category").addClass('off');
         }
         $("#bedroom-value").html(lastDP);
         $("#bedroom-category").html(category);
         $("#bedroom-date").html(Math.floor((new Date().getTime()- now.getTime())/1000)*0.01 + "kWh");
         yVal1 = parseInt(lastDP);
+        yVal2 = 0;
+        yVal3 = 0;
+        yVal4 = 0;
       });
       dpsBed.push({
         x: xVal,
         y: yVal1
+      });
+      dpsBath.push({
+        x: xVal,
+        y: yVal2
+      });
+      dpsLiving.push({
+        x: xVal,
+        y: yVal3
+      });
+      dpsKitchen.push({
+        x: xVal,
+        y: yVal4
       });
       xVal = new Date();
     }
@@ -154,7 +160,6 @@ window.onload = function() {
     chart.render();
   };
 
-  // Update each second for dynamic chart
   updateChart(dataLength);
   setInterval(function() {
     updateChart();
