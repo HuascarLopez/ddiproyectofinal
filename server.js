@@ -58,7 +58,7 @@ app.use(function(req, res, next) {
   res.status(404).sendFile(__dirname + "/views/404.html");
 });
 
-// Routing for REST API
+// Routing of the app
 apiRoutes(app);
 
 // Download info from the api
