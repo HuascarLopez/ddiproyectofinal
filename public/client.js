@@ -27,11 +27,14 @@ $(document).ready(function() {
     data = data.datapoints;
     lastDP = data[data.length - 1].value;
 
-    if (parseInt(lastDP) > 10) {
-      category = "ON";
+    if (parseInt(lastDP) > 50) {
+     category = "Lights ON";
+     $("#bedroom-category").removeClass('off').addClass('on');
     } else {
-      category = "OFF";
+     category = "Lights OFF";
+     $("#bedroom-category").removeClass('on').addClass('off');
     }
+   
     $("#bedroom-value").html(lastDP);
     $("#bedroom-category").html(category);
     $("#bedroom-date").html(new Date());
