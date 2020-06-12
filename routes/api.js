@@ -198,6 +198,7 @@ module.exports = function(app) {
 /*
   Function to generate room {:id}
 */
+
 function generateID() {
   let id = "";
   let values = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
