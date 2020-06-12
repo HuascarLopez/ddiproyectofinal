@@ -291,3 +291,11 @@ input[type=submit]:hover, button:hover {
 .sensor-label label{
   margin: auto;
 }
+
+.on{
+  text-shadow: steelblue 1px 0 10px;
+}
+
+.off{
+  text-shadow: gray 1px 0 10px;
+}
