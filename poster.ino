@@ -1,7 +1,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WiFi.h>
 
-int aPin = A0;
+int analogPin = A0;
 HTTPClient http;
 
 void setup() {
@@ -10,12 +10,9 @@ void setup() {
   WiFi.begin("INFINITUMD967", "4127513420");   //WiFi connection
  
   while (WiFi.status() != WL_CONNECTED) {  //Wait for the WiFI connection completion
- 
     delay(500);
     Serial.println("Waiting for connection");
- 
   }
-
   Serial.println(WiFi.localIP());
 }
  
@@ -25,41 +22,27 @@ void loop() {
 
   if(WiFi.status()== WL_CONNECTED){   //Check WiFi connection status
  
-   HTTPClient http;    //Declare object of class HTTPClient
+    HTTPClient http;    //Declare object of class HTTPClient 
+    int datapoint = analogRead(analogPin);
 
-   
-  int a = analogRead(aPin);
- 
-  Serial.println("Hello from ESP8266");
-  Serial.println(a);
+    Serial.println("Hello from ESP8266");
+    Serial.println(datapoint);
 
-  if(a <= 800){
-    digitalWrite(16,HIGH);  
-  }
-  else{
-   digitalWrite(16, LOW);  
-  }
+    String message = (String) datapoint;
+    
+    http.begin("http://ddiproyectofinal.glitch.me/api/rooms/BjpgUJTT/"+b);      //Specify request destination
+    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
 
-  String b = (String) a;
- 
-   http.begin("http://ddiproyectofinal.glitch.me/api/rooms/BjpgUJTT/"+b);      //Specify request destination
-   http.addHeader("Content-Type", "text/plain");  //Specify content-type header
- 
-   int httpCode = http.POST("Message from ESP8266");   //Send the request
-   String payload = http.getString();                  //Get the response payload
- 
-   Serial.println(httpCode);   //Print HTTP return code
-   Serial.println(payload);    //Print request response payload
- 
-   http.end();  //Close connection
- 
+    int httpCode = http.POST("Message from ESP8266");   //Send the request
+    String payload = http.getString();                  //Get the response payload
+
+    Serial.println(httpCode);   //Print HTTP return code
+    Serial.println(payload);    //Print request response payload
+
+    http.end();  //Close connection
  }
-
  else{
- 
     Serial.println("Error in WiFi connection");  
- 
  }
-
   delay(1000);
 }
