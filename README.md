@@ -20,4 +20,4 @@ En el lado del servidor,
 
 ### Made by [Huascar López](https://github.com/HuascarLopez)
 
-**Este proyecto** se realizó durante el periodo de Febrero-Mayo 2020 para cumplir con los requerimientos de la modalidad a titulo de suficiencia del curso 'Diseño de Interfaces' en Cetys Universidad Campus Tijuana
+Este proyecto se realizó durante el periodo de Febrero-Mayo 2020 para cumplir con los requerimientos de la modalidad a titulo de suficiencia del curso 'Diseño de Interfaces' en Cetys Universidad Campus Tijuana
